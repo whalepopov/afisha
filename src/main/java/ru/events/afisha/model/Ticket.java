@@ -4,12 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @Getter
 @Setter
 public class Ticket {
-    private Long ticketId;
-    private Long eventId;
+    private UUID ticketId;
+    private UUID eventId;
     private Integer placeId;
     private Integer rowId;
 }
