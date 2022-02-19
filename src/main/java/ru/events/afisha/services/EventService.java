@@ -14,7 +14,7 @@ public class EventService {
     private Event event;
     private List<Event> eventList;
 
-    //@Sendable
+    @Sendable
     public Event addEvent(String title, String description, String ageCategory, Integer capacity) {
         event = new Event(UUID.randomUUID(), title, description, ageCategory, capacity);
         if (eventList == null || eventList.size() == 0) {
@@ -32,6 +32,7 @@ public class EventService {
         event.setCapacity(capacity);
     }
 
+    @Sendable
     public void deleteEvent() {
         eventList.remove(event);
     }
@@ -41,6 +42,7 @@ public class EventService {
         return event;
     }
 
+    @Sendable
     public void getEventList() {
         for (Event event : eventList) {
             System.out.println(event.getEventId() + " " + event.getTitle() + " " + event.getDescription() + " " + event.getAgeCategory());
