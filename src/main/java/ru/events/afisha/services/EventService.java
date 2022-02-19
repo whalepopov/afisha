@@ -1,6 +1,7 @@
 package ru.events.afisha.services;
 
 import org.springframework.stereotype.Service;
+import ru.events.afisha.annotations.Sendable;
 import ru.events.afisha.model.Event;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class EventService {
     private Event event;
     private List<Event> eventList;
 
+    //@Sendable
     public Event addEvent(String title, String description, String ageCategory, Integer capacity) {
         event = new Event(UUID.randomUUID(), title, description, ageCategory, capacity);
         if (eventList == null || eventList.size() == 0) {
@@ -22,6 +24,7 @@ public class EventService {
         return event;
     }
 
+    @Sendable
     public void setEvent(String title, String description, String ageCategory, Integer capacity) {
         event.setTitle(title);
         event.setDescription(description);

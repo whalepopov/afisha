@@ -1,6 +1,7 @@
 package ru.events.afisha.services;
 
 import org.springframework.stereotype.Service;
+import ru.events.afisha.annotations.Sendable;
 import ru.events.afisha.model.Ticket;
 
 import java.util.UUID;
@@ -10,6 +11,7 @@ public class TicketService {
 
     private Ticket ticket;
 
+    @Sendable
     public void buyTicket(UUID eventId, Integer placeId, Integer rowId) {
         System.out.println("Билет куплен: место " + placeId + ", ряд " + rowId);
     }
