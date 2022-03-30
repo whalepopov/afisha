@@ -12,21 +12,24 @@ import java.util.UUID;
 public class AfishaApplication {
 
     public static void main(String[] args) {
-        //SpringApplication.run(AfishaApplication.class, args);
 
         final ConfigurableApplicationContext ctx = SpringApplication.run(AfishaApplication.class, args);
-        ctx.getBean(EventService.class).addEvent("Guns N’ Roses", "будет жарко ", "18+", 30000);
-        ctx.getBean(EventService.class).setEvent("Red Hot Chili Peppers", "будет весело", "18+", 30000);
-        ctx.getBean(EventService.class).addEvent("Pearl Jam", "опапа", "21+", 50000);
-        ctx.getBean(EventService.class).getEventList();
+
+        final EventService eventService = ctx.getBean(EventService.class);
+        final TicketService ticketService = ctx.getBean(TicketService.class);
+
+        eventService.addEvent("Guns N’ Roses", "будет жарко ", "18+", 30000);
+        eventService.setEvent("Red Hot Chili Peppers", "будет весело", "18+", 30000);
+        eventService.addEvent("Pearl Jam", "опапа", "21+", 50000);
+        eventService.getEventList();
         System.out.println("-----------");
-        ctx.getBean(EventService.class).deleteEvent();
-        ctx.getBean(EventService.class).getEventList();
+        eventService.deleteEvent();
+        eventService.getEventList();
 
         System.out.println("-----------||-----------");
         UUID guid = UUID.randomUUID();
-        ctx.getBean(TicketService.class).buyTicket(guid, 13, 13);
-        ctx.getBean(TicketService.class).returnTicket(guid);
+        ticketService.buyTicket(guid, 13, 13);
+        ticketService.returnTicket(guid);
 
     }
 }
