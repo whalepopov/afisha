@@ -3,6 +3,7 @@ package ru.events.afisha;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import ru.events.afisha.entities.EventEntity;
 import ru.events.afisha.services.EventService;
 import ru.events.afisha.services.TicketService;
 
@@ -18,18 +19,20 @@ public class AfishaApplication {
         final EventService eventService = ctx.getBean(EventService.class);
         final TicketService ticketService = ctx.getBean(TicketService.class);
 
-        eventService.addEvent("Guns N’ Roses", "будет жарко ", "18+", 30000);
-        eventService.setEvent("Red Hot Chili Peppers", "будет весело", "18+", 30000);
-        eventService.addEvent("Pearl Jam", "опапа", "21+", 50000);
-        eventService.getEventList();
-        System.out.println("-----------");
-        eventService.deleteEvent();
-        eventService.getEventList();
+        eventService.addEvent("Guns and Roses", "will be hot", "10+", 7000);
 
-        System.out.println("-----------||-----------");
-        UUID guid = UUID.randomUUID();
-        ticketService.buyTicket(guid, 13, 13);
-        ticketService.returnTicket(guid);
+        eventService.printAll();
+
+        eventService.setEvent(new EventEntity(999L, "Rock", "great", "6+", 25000, 1));
+
+        eventService.printEvent(999L);
+
+        eventService.printAll();
+        System.out.println("всего:" + eventService.getAll().size());
+
+        Long ticketId = ticketService.buyTicket(999L, 13, 13);
+        System.out.println("билет " + ticketId.toString());
+        // ticketService.refundTicket(ticketId);
 
     }
 }

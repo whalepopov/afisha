@@ -14,7 +14,7 @@
     <name>afisha</name>
     <description>project for events.afisha</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
     </properties>
     <dependencies>

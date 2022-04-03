@@ -8,12 +8,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="premiere")
+@Table(name = "event")
 public class EventEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_premiere")
-    @SequenceGenerator(name = "seq_premiere", sequenceName = "public.seq_premiere", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_event")
+    @SequenceGenerator(name = "seq_event", sequenceName = "public.seq_event", allocationSize = 1)
     @Column(name = "id")
     private Long id;
 

@@ -8,7 +8,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="ticket")
+@Table(name = "ticket")
 public class TicketEntity {
 
     @Id
@@ -16,9 +16,9 @@ public class TicketEntity {
     @SequenceGenerator(name = "seq_ticket", sequenceName = "public.seq_ticket", allocationSize = 1)
     private Long id;
 
-    @JoinColumn(name = "premiere_id")
+    @JoinColumn(name = "event_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    private EventEntity premiere;
+    private EventEntity event;
 
     @Column(name = "place")
     private Integer place;
