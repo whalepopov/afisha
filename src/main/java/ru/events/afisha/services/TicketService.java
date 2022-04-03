@@ -1,15 +1,22 @@
 package ru.events.afisha.services;
 
+import lombok.extern.slf4j.Slf4j;
 import ru.events.afisha.entities.EventEntity;
 import ru.events.afisha.entities.TicketEntity;
 import ru.events.afisha.mappers.MyMapper;
+import ru.events.afisha.model.Ticket;
 import ru.events.afisha.repository.JpaEventRepository;
 import ru.events.afisha.repository.JpaTicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+
 @Service
+@Slf4j
 public class TicketService {
 
     private JpaTicketRepository repository;
@@ -27,16 +34,32 @@ public class TicketService {
     public Long buyTicket(Long eventId, Integer place, Integer row) {
         EventEntity event = eventRepository.getById(eventId);
         TicketEntity ticketEntity = repository.save(new TicketEntity(null, event, place, row, 0));
-        eventRepository.save(new EventEntity(null, event.getTitle(), event.getDescription(), event.getAgeCategory(), event.getCapacity() - 1, event.getVersion()));
+        eventRepository.save(new EventEntity(event.getId(), event.getTitle(), event.getDescription(), event.getAgeCategory(), event.getCapacity()-1, event.getVersion()));
         return ticketEntity.getId();
     }
+
+    @Transactional
+    public Long buyTicket(Ticket ticket) {
+        log.info(ticket.toString());
+        EventEntity event = eventRepository.getById(ticket.getEventId());
+        eventRepository.save(new EventEntity(event.getId(), event.getTitle(), event.getDescription(), event.getAgeCategory(), event.getCapacity()-1, event.getVersion()));
+        TicketEntity ticketEntity = repository.save(new TicketEntity(null, event, ticket.getPlaceId(), ticket.getRowId(), 0));
+        return ticketEntity.getId();
+    }
+
+    public List<Ticket> getAll() {
+        return repository.findAll().stream()
+                .map(mapper::toDomain)
+                .collect(Collectors.toList());
+    }
+
 
     @Transactional
     public void refundTicket(Long ticketId) {
         TicketEntity ticketEntity = repository.getById(ticketId);
         System.out.println(ticketEntity.getEvent());
         EventEntity event = eventRepository.getById(ticketEntity.getEvent().getId());
-        eventRepository.save(new EventEntity(event.getId(), event.getTitle(), event.getDescription(), event.getAgeCategory(), event.getCapacity() + 1, event.getVersion()));
+        eventRepository.save(new EventEntity(event.getId(), event.getTitle(), event.getDescription(), event.getAgeCategory(), event.getCapacity()+1, event.getVersion()));
         repository.deleteById(ticketId);
     }
 

@@ -25,24 +25,21 @@ public class EventService {
     }
 
     @Transactional
-    public void addEvent(String title, String description, String ageCategory, Integer capacity) {
-        EventEntity eventEntity = new EventEntity(null, title, description, ageCategory, capacity, 0);
-        eventRepository.save(eventEntity);
-
-//        eventRepository.save(new EventEntity(789L, title, description, ageCategory, capacity, 1));
-
-    }
-
-    @Sendable
-    @Transactional
-    public void setEvent(EventEntity eventEntity) {
-        final EventEntity pr = eventRepository.getById(eventEntity.getId());
-        eventRepository.save(new EventEntity(eventEntity.getId(), eventEntity.getTitle(), eventEntity.getDescription(), eventEntity.getAgeCategory(), eventEntity.getCapacity(), pr.getVersion()));
+    public Long addEvent(Event event) {
+        EventEntity savedEntity = eventRepository.save(mapper.toEntity(event));
+        return savedEntity.getId();
     }
 
     @Transactional
-    public void deleteEvent(EventEntity eventEntity) {
-        eventRepository.delete(eventEntity);
+    public void setEvent(Event event) {
+        final EventEntity pr = eventRepository.getById(event.getEventId());
+        eventRepository.save(new EventEntity(event.getEventId(), event.getTitle(), event.getDescription(), event.getAgeCategory(), event.getCapacity(), pr.getVersion()));
+    }
+
+
+    @Transactional
+    public void deleteById(Long id) {
+        eventRepository.deleteById(id);
     }
 
     public void printEvent(Long id) {
@@ -55,6 +52,10 @@ public class EventService {
 
     public EventEntity getbyId(Long id) {
         return eventRepository.getById(id);
+    }
+
+    public Event get(Long id) {
+        return mapper.toDomain(eventRepository.getById(id));
     }
 
     public List<Event> getAll() {
