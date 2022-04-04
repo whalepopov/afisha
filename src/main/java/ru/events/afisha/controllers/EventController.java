@@ -47,7 +47,7 @@ public class EventController {
     }
 
     @GetMapping
-    public Collection<EventDto> getAll () {
+    public Collection<EventDto> getAll() {
         List<Event> eventList = eventService.getAll();
         log.info(String.valueOf(eventList.size()) + " премьер");
         return eventList.stream().map(mapper::toDto).collect(toList());

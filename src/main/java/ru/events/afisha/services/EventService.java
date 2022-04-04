@@ -1,6 +1,5 @@
 package ru.events.afisha.services;
 
-import ru.events.afisha.annotations.Sendable;
 import ru.events.afisha.entities.EventEntity;
 import ru.events.afisha.mappers.MyMapper;
 import ru.events.afisha.model.Event;
