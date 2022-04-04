@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/tickets")
+@RequestMapping("/api/tickets")
 public class TicketController {
     private TicketService ticketService;
     private MyMapper mapper;

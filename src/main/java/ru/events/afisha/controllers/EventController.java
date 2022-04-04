@@ -14,7 +14,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @RestController
-@RequestMapping("/api/v1/ololo")
+@RequestMapping("/api/event")
 @Slf4j
 public class EventController {
     private EventService eventService;
