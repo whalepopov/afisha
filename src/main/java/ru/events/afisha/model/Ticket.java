@@ -10,5 +10,4 @@ public class Ticket {
     private Long eventId;
     private Integer placeId;
     private Integer rowId;
-
 }

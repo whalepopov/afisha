@@ -11,5 +11,4 @@ public class Event {
     private String description;
     private String ageCategory;
     private Integer capacity;
-
 }

@@ -24,6 +24,7 @@ public class EventController {
     public EventController(EventService eventService, MyMapper mapper) {
         this.eventService = eventService;
         this.mapper = mapper;
+
     }
 
     @PostMapping

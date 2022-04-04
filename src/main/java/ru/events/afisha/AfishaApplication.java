@@ -8,5 +8,6 @@ public class AfishaApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AfishaApplication.class, args);
+
     }
 }
